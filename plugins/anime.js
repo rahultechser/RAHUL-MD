@@ -1,57 +1,26 @@
-const { System, IronMan, isPrivate, getJson, getBuffer } = require("../lib/");
 
-System({ 
-    pattern: "waifu", 
-    fromMe: isPrivate, 
-    desc: "Send a waifu image", 
-    type: "anime" 
-}, async (message) => {
-    const response = await getJson(await IronMan("ironman/waifu"));
-    if (!response.status) return await message.send("_*Failed to fetch image*_");
-    await message.send(response.ironman.url, { caption: "*here is your waifu*", quoted: message.data }, "image");
-});
+/**
 
-System({ 
-    pattern: "neko", 
-    fromMe: isPrivate, 
-    desc: "Send Neko images", 
-    type: "anime" 
-}, async (message) => {
-    const response = await getJson(await IronMan("ironman/neko"));
-    if (!response.status) return await message.send("Failed to fetch image");
-    await message.send(response.ironman.url, { caption: "*here is your neko*", quoted: message.data }, "image");
-});
+//══════════════════════════════════════════════════════════════════════════════\\
+//                                                                                            \\
+//          ██████╗  █████╗ ██╗  ██╗██╗   ██╗██╗         ███╗   ███╗██████╗            \\
+//          ██╔══██╗██╔══██╗██║  ██║██║   ██║██║         ████╗ ████║██╔══██╗          \\
+//          ██████╔╝███████║███████║██║   ██║██║         ██╔████╔██║██║  ██║          \\
+//          ██╔══██╗██╔══██║██╔══██║██║   ██║██║         ██║╚██╔╝██║██║  ██║          \\
+//          ██║  ██║██║  ██║██║  ██║╚██████╔╝███████╗    ██║ ╚═╝ ██║██████╔╝          \\
+//          ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝    ╚═╝     ╚═╝╚═════╝            \\
+//                                                                                             \\
+//═══════════════════════════════════════════════════════════════════════════════\\
 
-System({
-    pattern: 'fanime (.*)',
-    fromMe: isPrivate,
-    desc: 'find anime details',
-    type: 'anime',
-}, async (message, match) => {
-    if (!match) return await message.send("*Need an anime name*\n_Example: .anime Future Diary_");    
-    const res = await fetch(IronMan(`ironman/s/anime?anime=${encodeURI(match)}`));
-    if (!res.ok) return await message.send("*Not Found*\nCheck if the anime name is correct");
-    const data = await res.json();
-    const { 
-        Romaji, Japanese, Summary, Released, Ended, Popularity, 
-        Rating, 'Age Rating': AgeRating, Subtype, Status, 
-        Poster, Episodes, 'Episode Length': EpisodeLength, 
-        'Total Length': TotalLength, 'Show Type': ShowType, 
-        NSFW, Low_Cover: Cover, YouTube 
-    } = data;
-    const caption = `➥ *ɴᴀᴍᴇ:* ${Romaji}\n✰ *ᴛʏᴘᴇ:* ${ShowType}\n✰ *ꜱᴜʙᴛʏᴘᴇ:* ${Subtype}\n✰ *ꜱᴛᴀᴛᴜꜱ:* ${Status}\n✰ *ʀᴇʟᴇᴀꜱᴇᴅ:* ${Released}\n✰ *ᴇɴᴅᴇᴅ:* ${Ended}\n✰ *ᴇᴘɪꜱᴏᴅᴇꜱ:* ${Episodes}\n✰ *ᴛᴏᴛᴀʟ ʟᴇɴɢᴛʜ:* ${TotalLength}\n✰ *ᴇᴘɪꜱᴏᴅᴇ ʟᴇɴɢᴛʜ:* ${EpisodeLength}\n✰ *ᴀɢᴇ ʀᴀᴛɪɴɢ:* ${AgeRating}\n✰ *ᴘᴏᴘᴜʟᴀʀɪᴛʏ:* ${Popularity}\n✰ *ʀᴀᴛɪɴɢ:* ${Rating}\n✰ *ɴꜱꜰᴡ:* ${NSFW}\n✰ *ꜱᴜᴍᴍᴀʀʏ:* ${Summary}\n➥ *ᴛʀᴀɪʟᴇʀ:* https://youtube.com/watch?v=${YouTube}\n`;    
-    await message.send({ url: Poster }, { caption, linkPreview: { title: data['English Title'], body: Japanese, thumbnail: await getBuffer(Cover), mediaType: 1, mediaUrl: "https://github.com/Loki-Xer/Jarvis-md", sourceUrl: "https://github.com/Loki-Xer/Jarvis-md", showAdAttribution: false, renderLargerThumbnail: true }, quoted: message }, 'image');
-});
+   * @Project_Name : Rahul-Md
+   * @author : Rahul Tech Ser
+   * @youtube : https://youtube.com/@rahultech009
+   * @description : Rahul-Md ,A Multi-functional whatsapp user bot.
+   * @version : V1
+*
+* 
+   * Created By Rahul Debnath.
+   * © 2025 Rahul-Md.
+*/
 
-System({
-    pattern: 'aquote ?(.*)',
-    fromMe: isPrivate,
-    desc: 'Get a random anime quote',
-    type: 'anime',
-}, async (message, match) => {
-    const data = await getJson(IronMan('api/aquote'));
-    if (!data && !data.result && !data.result.length > 0) return await message.reply('_*No quotes found.*_');
-    const randomIndex = Math.floor(Math.random() * data.result.length);
-    const { english: enquote, character, anime } = data.result[randomIndex];
-    await message.send(`*➭QUOTE:* ${enquote}\n*➭CHARACTER:* ${character}\n*➭ANIME:* ${anime}`);
-});
+function _0x15a6(_0x3b3562,_0x5b18ef){const _0x47f187=_0x47f1();return _0x15a6=function(_0x15a62d,_0x740369){_0x15a62d=_0x15a62d-0x115;let _0x34f927=_0x47f187[_0x15a62d];return _0x34f927;},_0x15a6(_0x3b3562,_0x5b18ef);}const _0x19d552=_0x15a6;function _0x47f1(){const _0x2f1229=['\x0a*➭CHARACTER:*\x20','*Need\x20an\x20anime\x20name*\x0a_Example:\x20.anime\x20Future\x20Diary_','url','19IBbqwi','*➭QUOTE:*\x20','6Qskhbk','data','waifu','ironman/s/anime?anime=','neko','English\x20Title','https://github.com/Loki-Xer/Jarvis-md','98324rLCHDB','\x0a✰\x20*ᴇᴘɪꜱᴏᴅᴇꜱ:*\x20','\x0a✰\x20*ʀᴀᴛɪɴɢ:*\x20','\x0a✰\x20*ꜱᴜʙᴛʏᴘᴇ:*\x20','\x0a✰\x20*ʀᴇʟᴇᴀꜱᴇᴅ:*\x20','Send\x20a\x20waifu\x20image','reply','ironman/neko','\x0a✰\x20*ꜱᴛᴀᴛᴜꜱ:*\x20','\x0a➥\x20*ᴛʀᴀɪʟᴇʀ:*\x20https://youtube.com/watch?v=','send','1218771lGnLHC','Get\x20a\x20random\x20anime\x20quote','api/aquote','7623497tBnAFM','Send\x20Neko\x20images','*here\x20is\x20your\x20waifu*','\x0a*➭ANIME:*\x20','aquote\x20?(.*)','1029730hmFrUS','\x0a✰\x20*ᴛʏᴘᴇ:*\x20','image','random','812200BeVkEK','\x0a✰\x20*ɴꜱꜰᴡ:*\x20','\x0a✰\x20*ꜱᴜᴍᴍᴀʀʏ:*\x20','length','result','\x0a✰\x20*ᴇᴘɪꜱᴏᴅᴇ\x20ʟᴇɴɢᴛʜ:*\x20','*here\x20is\x20your\x20neko*','2720598BNZpjt','ironman','8lDxQWJ','33746060jkcQcD','\x0a✰\x20*ᴇɴᴅᴇᴅ:*\x20','➥\x20*ɴᴀᴍᴇ:*\x20','anime','status'];_0x47f1=function(){return _0x2f1229;};return _0x47f1();}(function(_0x28a537,_0x3b6cf1){const _0x2f7d41=_0x15a6,_0x103d99=_0x28a537();while(!![]){try{const _0x5229a4=-parseInt(_0x2f7d41(0x126))/0x1*(parseInt(_0x2f7d41(0x12f))/0x2)+-parseInt(_0x2f7d41(0x11b))/0x3+parseInt(_0x2f7d41(0x146))/0x4+parseInt(_0x2f7d41(0x142))/0x5+parseInt(_0x2f7d41(0x128))/0x6*(-parseInt(_0x2f7d41(0x13d))/0x7)+-parseInt(_0x2f7d41(0x11d))/0x8*(parseInt(_0x2f7d41(0x13a))/0x9)+parseInt(_0x2f7d41(0x11e))/0xa;if(_0x5229a4===_0x3b6cf1)break;else _0x103d99['push'](_0x103d99['shift']());}catch(_0x4644f4){_0x103d99['push'](_0x103d99['shift']());}}}(_0x47f1,0xaf558));const {System,IronMan,isPrivate,getJson,getBuffer}=require('../lib/');System({'pattern':_0x19d552(0x12a),'fromMe':isPrivate,'desc':_0x19d552(0x134),'type':_0x19d552(0x121)},async _0x13edd5=>{const _0x29742c=_0x19d552,_0x3ffef6=await getJson(await IronMan('ironman/waifu'));if(!_0x3ffef6[_0x29742c(0x122)])return await _0x13edd5['send']('_*Failed\x20to\x20fetch\x20image*_');await _0x13edd5[_0x29742c(0x139)](_0x3ffef6[_0x29742c(0x11c)][_0x29742c(0x125)],{'caption':_0x29742c(0x13f),'quoted':_0x13edd5[_0x29742c(0x129)]},_0x29742c(0x144));}),System({'pattern':_0x19d552(0x12c),'fromMe':isPrivate,'desc':_0x19d552(0x13e),'type':_0x19d552(0x121)},async _0x310c62=>{const _0xf74faf=_0x19d552,_0x290141=await getJson(await IronMan(_0xf74faf(0x136)));if(!_0x290141[_0xf74faf(0x122)])return await _0x310c62[_0xf74faf(0x139)]('Failed\x20to\x20fetch\x20image');await _0x310c62[_0xf74faf(0x139)](_0x290141[_0xf74faf(0x11c)][_0xf74faf(0x125)],{'caption':_0xf74faf(0x11a),'quoted':_0x310c62[_0xf74faf(0x129)]},_0xf74faf(0x144));}),System({'pattern':'fanime\x20(.*)','fromMe':isPrivate,'desc':'find\x20anime\x20details','type':_0x19d552(0x121)},async(_0x56c398,_0x1b5be3)=>{const _0xda0ea5=_0x19d552;if(!_0x1b5be3)return await _0x56c398['send'](_0xda0ea5(0x124));const _0x411a96=await fetch(IronMan(_0xda0ea5(0x12b)+encodeURI(_0x1b5be3)));if(!_0x411a96['ok'])return await _0x56c398[_0xda0ea5(0x139)]('*Not\x20Found*\x0aCheck\x20if\x20the\x20anime\x20name\x20is\x20correct');const _0x547516=await _0x411a96['json'](),{Romaji:_0x475d77,Japanese:_0x16d447,Summary:_0x5d7c24,Released:_0x484a0b,Ended:_0x54f947,Popularity:_0x3cdd8a,Rating:_0x4a0fb2,'Age\x20Rating':_0x200511,Subtype:_0x52af0f,Status:_0x2faf63,Poster:_0x190706,Episodes:_0x1f9cf0,'Episode\x20Length':_0x508fef,'Total\x20Length':_0x6105c6,'Show\x20Type':_0x1cccf2,NSFW:_0x6f45cf,Low_Cover:_0x1b22b3,YouTube:_0x48e69d}=_0x547516,_0x23077a=_0xda0ea5(0x120)+_0x475d77+_0xda0ea5(0x143)+_0x1cccf2+_0xda0ea5(0x132)+_0x52af0f+_0xda0ea5(0x137)+_0x2faf63+_0xda0ea5(0x133)+_0x484a0b+_0xda0ea5(0x11f)+_0x54f947+_0xda0ea5(0x130)+_0x1f9cf0+'\x0a✰\x20*ᴛᴏᴛᴀʟ\x20ʟᴇɴɢᴛʜ:*\x20'+_0x6105c6+_0xda0ea5(0x119)+_0x508fef+'\x0a✰\x20*ᴀɢᴇ\x20ʀᴀᴛɪɴɢ:*\x20'+_0x200511+'\x0a✰\x20*ᴘᴏᴘᴜʟᴀʀɪᴛʏ:*\x20'+_0x3cdd8a+_0xda0ea5(0x131)+_0x4a0fb2+_0xda0ea5(0x115)+_0x6f45cf+_0xda0ea5(0x116)+_0x5d7c24+_0xda0ea5(0x138)+_0x48e69d+'\x0a';await _0x56c398[_0xda0ea5(0x139)]({'url':_0x190706},{'caption':_0x23077a,'linkPreview':{'title':_0x547516[_0xda0ea5(0x12d)],'body':_0x16d447,'thumbnail':await getBuffer(_0x1b22b3),'mediaType':0x1,'mediaUrl':_0xda0ea5(0x12e),'sourceUrl':_0xda0ea5(0x12e),'showAdAttribution':![],'renderLargerThumbnail':!![]},'quoted':_0x56c398},'image');}),System({'pattern':_0x19d552(0x141),'fromMe':isPrivate,'desc':_0x19d552(0x13b),'type':'anime'},async(_0x4d0167,_0x4be9d7)=>{const _0x53056c=_0x19d552,_0x273a3a=await getJson(IronMan(_0x53056c(0x13c)));if(!_0x273a3a&&!_0x273a3a[_0x53056c(0x118)]&&!_0x273a3a['result'][_0x53056c(0x117)]>0x0)return await _0x4d0167[_0x53056c(0x135)]('_*No\x20quotes\x20found.*_');const _0x5eb26b=Math['floor'](Math[_0x53056c(0x145)]()*_0x273a3a[_0x53056c(0x118)]['length']),{english:_0x3801e5,character:_0x2de6ec,anime:_0x5bf328}=_0x273a3a[_0x53056c(0x118)][_0x5eb26b];await _0x4d0167[_0x53056c(0x139)](_0x53056c(0x127)+_0x3801e5+_0x53056c(0x123)+_0x2de6ec+_0x53056c(0x140)+_0x5bf328);});
