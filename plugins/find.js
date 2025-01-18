@@ -1,81 +1,26 @@
-const { System, isPrivate, yts } = require('../lib');
-const { audioCut } = require("./client/"); 
-const FormData = require('form-data');
-const axios = require('axios');  
-const crypto = require('crypto');
-const fs = require('fs');
 
-function buildStringToSign(
-    method,
-    uri,
-    accessKey,
-    dataType,
-    signatureVersion,
-    timestamp
-) {
-    return [method, uri, accessKey, dataType, signatureVersion, timestamp].join(
-        '\n'
-    );
-}
+/**
 
-function sign(signString, accessSecret) {
-    return crypto
-        .createHmac('sha1', accessSecret)
-        .update(Buffer.from(signString, 'utf-8'))
-        .digest()
-        .toString('base64');
-}
+//══════════════════════════════════════════════════════════════════════════════\\
+//                                                                                            \\
+//          ██████╗  █████╗ ██╗  ██╗██╗   ██╗██╗         ███╗   ███╗██████╗            \\
+//          ██╔══██╗██╔══██╗██║  ██║██║   ██║██║         ████╗ ████║██╔══██╗          \\
+//          ██████╔╝███████║███████║██║   ██║██║         ██╔████╔██║██║  ██║          \\
+//          ██╔══██╗██╔══██║██╔══██║██║   ██║██║         ██║╚██╔╝██║██║  ██║          \\
+//          ██║  ██║██║  ██║██║  ██║╚██████╔╝███████╗    ██║ ╚═╝ ██║██████╔╝          \\
+//          ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝    ╚═╝     ╚═╝╚═════╝            \\
+//                                                                                             \\
+//═══════════════════════════════════════════════════════════════════════════════\\
 
-System({
-    pattern: 'find',
-    fromMe: isPrivate,
-    desc: 'Find details of a song',
-    type: 'search',
-}, async (message, match) => {
-    if (!message.quoted || (!message.reply_message.audio && !message.reply_message.video)) return await message.reply('*Reply to audio or video*');
-    const p = await message.reply_message.downloadAndSave();
-    const options = {
-       host: 'identify-eu-west-1.acrcloud.com',
-       endpoint: '/v1/identify',
-       signature_version: '1',
-       data_type: 'audio',
-       secure: true,
-       access_key: '8c21a32a02bf79a4a26cb0fa5c941e95',
-       access_secret: 'NRSxpk6fKwEiVdNhyx5lR0DP8LzeflYpClNg1gze',
-    };
-    const data = await audioCut(p, 0, 15);
-    const current_data = new Date();
-    const timestamp = current_data.getTime() / 1000;
-    const stringToSign = buildStringToSign(
-        'POST',
-        options.endpoint,
-        options.access_key,
-        options.data_type,
-        options.signature_version,
-        timestamp
-    );
-    const signature = sign(stringToSign, options.access_secret);
-    const form = new FormData();
-    form.append('sample', data);
-    form.append('sample_bytes', data.length);
-    form.append('access_key', options.access_key);
-    form.append('data_type', options.data_type);
-    form.append('signature_version', options.signature_version);
-    form.append('signature', signature);
-    form.append('timestamp', timestamp);
+   * @Project_Name : Rahul-Md
+   * @author : Rahul Tech Ser
+   * @youtube : https://youtube.com/@rahultech009
+   * @description : Rahul-Md ,A Multi-functional whatsapp user bot.
+   * @version : V1
+*
+* 
+   * Created By Rahul Debnath.
+   * © 2025 Rahul-Md.
+*/
 
-    const res = await axios.post('http://' + options.host + options.endpoint, form, {
-        headers: form.getHeaders()
-    });
-
-    const { status, metadata } = res.data;
-    if (status.msg !== 'Success') {
-        return await message.reply(status.msg);
-    }
-    
-    const { album, release_date, artists, title } = metadata.music[0];
-    const yt = await yts(title);
-
-    const cap = `*_${yt[0].title}_*\n\n\n*Album :* ${album.name || ''}\n*Artists :* ${artists !== undefined ? artists.map((v) => v.name).join(', ') : ''}\n*Release Date :* ${release_date}\n\n\`\`\`1.⬢\`\`\` *audio*\n\`\`\`2.⬢\`\`\` *video*\n\n_*Send a number as a reply to download*_`;
-    await message.send({ url: yt[0].image }, { caption: cap }, "image");
-});
+const _0x5120cf=_0x54ac;function _0x54ac(_0x4ca469,_0x4cccc7){const _0x522f79=_0x522f();return _0x54ac=function(_0x54acbb,_0x53f0e2){_0x54acbb=_0x54acbb-0x70;let _0x4d8e7c=_0x522f79[_0x54acbb];return _0x4d8e7c;},_0x54ac(_0x4ca469,_0x4cccc7);}(function(_0x1e695f,_0xacb623){const _0x34ff6d=_0x54ac,_0x23eb35=_0x1e695f();while(!![]){try{const _0x3c825d=-parseInt(_0x34ff6d(0x88))/0x1+parseInt(_0x34ff6d(0x81))/0x2*(parseInt(_0x34ff6d(0x80))/0x3)+parseInt(_0x34ff6d(0xa1))/0x4+parseInt(_0x34ff6d(0xa3))/0x5*(-parseInt(_0x34ff6d(0x82))/0x6)+parseInt(_0x34ff6d(0x87))/0x7+parseInt(_0x34ff6d(0x97))/0x8+-parseInt(_0x34ff6d(0x7f))/0x9;if(_0x3c825d===_0xacb623)break;else _0x23eb35['push'](_0x23eb35['shift']());}catch(_0x5af216){_0x23eb35['push'](_0x23eb35['shift']());}}}(_0x522f,0xf09c7));const {System,isPrivate,yts}=require(_0x5120cf(0x9a)),{audioCut}=require(_0x5120cf(0x94)),FormData=require('form-data'),axios=require(_0x5120cf(0xa5)),crypto=require('crypto'),fs=require('fs');function buildStringToSign(_0x3cf6cd,_0x1c6168,_0x510480,_0x32a86d,_0x1e942e,_0x274c38){return[_0x3cf6cd,_0x1c6168,_0x510480,_0x32a86d,_0x1e942e,_0x274c38]['join']('\x0a');}function _0x522f(){const _0x4931f5=['base64','5535600CwmdWM','1260235FSxAUW','utf-8','title','access_secret','video','post','/v1/identify','audio','\x0a\x0a```1.⬢```\x20*audio*\x0a```2.⬢```\x20*video*\x0a\x0a_*Send\x20a\x20number\x20as\x20a\x20reply\x20to\x20download*_','image','Success','getTime','./client/','map','from','13319528PqQyEG','send','access_key','../lib','name','append','toString','reply','downloadAndSave','data','5437556grupCI','sample_bytes','443010TeHMqS','getHeaders','axios','quoted','identify-eu-west-1.acrcloud.com','reply_message','\x0a*Release\x20Date\x20:*\x20','\x0a*Artists\x20:*\x20','length','msg','sha1','find','music','_*\x0a\x0a\x0a*Album\x20:*\x20','signature_version','endpoint','data_type','sample','signature','8c21a32a02bf79a4a26cb0fa5c941e95','Find\x20details\x20of\x20a\x20song','122832hepwmm','108168GAQfSE','12gsdfuS','120ypslZa','http://','createHmac','digest'];_0x522f=function(){return _0x4931f5;};return _0x522f();}function sign(_0x3d7c09,_0x19accb){const _0x544956=_0x5120cf;return crypto[_0x544956(0x84)](_0x544956(0x74),_0x19accb)['update'](Buffer[_0x544956(0x96)](_0x3d7c09,_0x544956(0x89)))[_0x544956(0x85)]()[_0x544956(0x9d)](_0x544956(0x86));}System({'pattern':_0x5120cf(0x75),'fromMe':isPrivate,'desc':_0x5120cf(0x7e),'type':'search'},async(_0x5b8d45,_0x37de9f)=>{const _0x2488f8=_0x5120cf;if(!_0x5b8d45[_0x2488f8(0xa6)]||!_0x5b8d45[_0x2488f8(0xa8)][_0x2488f8(0x8f)]&&!_0x5b8d45[_0x2488f8(0xa8)][_0x2488f8(0x8c)])return await _0x5b8d45['reply']('*Reply\x20to\x20audio\x20or\x20video*');const _0x49dc58=await _0x5b8d45[_0x2488f8(0xa8)][_0x2488f8(0x9f)](),_0x1d6686={'host':_0x2488f8(0xa7),'endpoint':_0x2488f8(0x8e),'signature_version':'1','data_type':_0x2488f8(0x8f),'secure':!![],'access_key':_0x2488f8(0x7d),'access_secret':'NRSxpk6fKwEiVdNhyx5lR0DP8LzeflYpClNg1gze'},_0x1cc2d5=await audioCut(_0x49dc58,0x0,0xf),_0x4f00e7=new Date(),_0x49b8aa=_0x4f00e7[_0x2488f8(0x93)]()/0x3e8,_0x3e44a9=buildStringToSign('POST',_0x1d6686[_0x2488f8(0x79)],_0x1d6686[_0x2488f8(0x99)],_0x1d6686[_0x2488f8(0x7a)],_0x1d6686['signature_version'],_0x49b8aa),_0x16a117=sign(_0x3e44a9,_0x1d6686[_0x2488f8(0x8b)]),_0xc82eb1=new FormData();_0xc82eb1['append'](_0x2488f8(0x7b),_0x1cc2d5),_0xc82eb1['append'](_0x2488f8(0xa2),_0x1cc2d5[_0x2488f8(0x72)]),_0xc82eb1['append'](_0x2488f8(0x99),_0x1d6686[_0x2488f8(0x99)]),_0xc82eb1['append'](_0x2488f8(0x7a),_0x1d6686['data_type']),_0xc82eb1[_0x2488f8(0x9c)](_0x2488f8(0x78),_0x1d6686[_0x2488f8(0x78)]),_0xc82eb1['append'](_0x2488f8(0x7c),_0x16a117),_0xc82eb1[_0x2488f8(0x9c)]('timestamp',_0x49b8aa);const _0x4d50dc=await axios[_0x2488f8(0x8d)](_0x2488f8(0x83)+_0x1d6686['host']+_0x1d6686[_0x2488f8(0x79)],_0xc82eb1,{'headers':_0xc82eb1[_0x2488f8(0xa4)]()}),{status:_0x1267a8,metadata:_0x3b6d1f}=_0x4d50dc[_0x2488f8(0xa0)];if(_0x1267a8[_0x2488f8(0x73)]!==_0x2488f8(0x92))return await _0x5b8d45[_0x2488f8(0x9e)](_0x1267a8[_0x2488f8(0x73)]);const {album:_0x833903,release_date:_0x1c9db8,artists:_0x28c316,title:_0x377954}=_0x3b6d1f[_0x2488f8(0x76)][0x0],_0x491861=await yts(_0x377954),_0x14fb0d='*_'+_0x491861[0x0][_0x2488f8(0x8a)]+_0x2488f8(0x77)+(_0x833903[_0x2488f8(0x9b)]||'')+_0x2488f8(0x71)+(_0x28c316!==undefined?_0x28c316[_0x2488f8(0x95)](_0x5e0df4=>_0x5e0df4[_0x2488f8(0x9b)])['join'](',\x20'):'')+_0x2488f8(0x70)+_0x1c9db8+_0x2488f8(0x90);await _0x5b8d45[_0x2488f8(0x98)]({'url':_0x491861[0x0][_0x2488f8(0x91)]},{'caption':_0x14fb0d},_0x2488f8(0x91));});
