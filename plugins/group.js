@@ -1,3 +1,28 @@
+
+/**
+
+//══════════════════════════════════════════════════════════════════════════════\\
+//                                                                                            \\
+//          ██████╗  █████╗ ██╗  ██╗██╗   ██╗██╗         ███╗   ███╗██████╗            \\
+//          ██╔══██╗██╔══██╗██║  ██║██║   ██║██║         ████╗ ████║██╔══██╗          \\
+//          ██████╔╝███████║███████║██║   ██║██║         ██╔████╔██║██║  ██║          \\
+//          ██╔══██╗██╔══██║██╔══██║██║   ██║██║         ██║╚██╔╝██║██║  ██║          \\
+//          ██║  ██║██║  ██║██║  ██║╚██████╔╝███████╗    ██║ ╚═╝ ██║██████╔╝          \\
+//          ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝    ╚═╝     ╚═╝╚═════╝            \\
+//                                                                                             \\
+//═══════════════════════════════════════════════════════════════════════════════\\
+
+   * @Project_Name : Rahul-Md
+   * @author : Rahul Tech Ser
+   * @youtube : https://youtube.com/@rahultech009
+   * @description : Rahul-Md ,A Multi-functional whatsapp user bot.
+   * @version : V1
+*
+* 
+   * Created By Rahul Debnath.
+   * © 2025 Rahul-Md.
+*/
+
 const {
     bot,
     Vote,
@@ -463,3 +488,4 @@ System({
       return `*Emoji*: ${Emoji}\n*Voted On*: ${VotedOn}\n*Total Votes:* ${Votes}\n*Percentage:* ${Percentage}\n*Votes By:* ${votersList}\n\n`;
       });
     } if (data.result.length > 0) formattedRes
+						
